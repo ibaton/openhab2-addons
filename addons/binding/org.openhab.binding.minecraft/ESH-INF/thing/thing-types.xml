@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<thing:thing-descriptions bindingId="minecraft"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:thing="http://eclipse.org/smarthome/schemas/thing-description/v1.0.0"
+        xsi:schemaLocation="http://eclipse.org/smarthome/schemas/thing-description/v1.0.0 http://eclipse.org/smarthome/schemas/thing-description-1.0.0.xsd">
+
+    <bridge-type id="server">
+        <label>Server</label>
+        <description>Server from which data is being fettched</description>
+
+        <channels>
+            <channel id="name" typeId="name"/>
+            <channel id="online" typeId="online"/>
+            <channel id="bukkitVersion" typeId="bukkitVersion"/>
+            <channel id="version" typeId="version"/>
+            <channel id="players" typeId="players"/>
+            <channel id="maxPlayers" typeId="maxPlayers"/>
+        </channels>
+
+	    <config-description>
+           <parameter name="hostname" type="text" required="true">
+               <label>Hostname or IP</label>
+               <description>Hostname or IP of the device</description>
+           </parameter>
+
+           <parameter name="port" type="integer">
+               <label>Port</label>
+               <description>The port on which the server can be accessed</description>
+               <default>10692</default>
+           </parameter>
+       </config-description>
+    </bridge-type>
+    
+    <thing-type id="player">
+        <supported-bridge-type-refs>
+            <bridge-type-ref id="server"/>
+        </supported-bridge-type-refs>
+        
+        <label>Player</label>
+        <description>A connected player on minecraft server</description>
+
+        <channels>
+            <channel id="playerName" typeId="playerName"/>
+            <channel id="playerOnline" typeId="playerOnline"/>
+            <channel id="playerLevel" typeId="playerLevel"/>
+            <channel id="playerTotalExperience" typeId="playerTotalExperience"/>
+            <channel id="playerExperiencePercentage" typeId="playerExperiencePercentage"/>
+            <channel id="playerHealth" typeId="playerHealth"/>
+            <channel id="playerWalkSpeed" typeId="playerWalkSpeed"/>
+            <channel id="playerLocationX" typeId="playerLocationX"/>
+            <channel id="playerLocationY" typeId="playerLocationY"/>
+            <channel id="playerLocationZ" typeId="playerLocationZ"/>
+        </channels>
+
+        <config-description>
+           <parameter name="playerName" type="text" required="true">
+               <label>Player name</label>
+               <description>The name of player</description>
+           </parameter>
+       </config-description>
+    </thing-type>
+    
+    <thing-type id="redstoneSign">
+        <supported-bridge-type-refs>
+            <bridge-type-ref id="server"/>
+        </supported-bridge-type-refs>
+    
+        <label>Sign</label>
+        <description>Sign with redstone going into block under it</description>
+
+        <channels>
+            <channel id="signActive" typeId="signActive"/>
+        </channels>
+
+        <config-description>
+           <parameter name="signName" type="text" required="true">
+               <label>Sign name</label>
+               <description>The text on sign</description>
+           </parameter>
+       </config-description>
+    </thing-type>
+    
+    <channel-type id="players">
+        <item-type>Number</item-type>
+        <label>Players</label>
+        <description>The number of players on server.</description>
+        <state readOnly="true"></state>
+    </channel-type>
+    
+    <channel-type id="maxPlayers">
+        <item-type>Number</item-type>
+        <label>Max Players</label>
+        <description>The maxumum number of players on server.</description>
+        <state readOnly="true"></state>
+    </channel-type>
+    
+    <channel-type id="bukkitVersion">
+        <item-type>String</item-type>
+        <label>Bukkit Version</label>
+        <description>The bukkit version running on server.</description>
+        <state readOnly="true"></state>
+    </channel-type>
+    
+    <channel-type id="version">
+        <item-type>String</item-type>
+        <label>Version</label>
+        <description>The Minecraft version running on server.</description>
+        <state readOnly="true"></state>
+    </channel-type>
+    
+    <channel-type id="name">
+        <item-type>String</item-type>
+        <label>Name</label>
+        <description>Name of minecraft server</description>
+        <state readOnly="true"></state>
+    </channel-type>
+    
+    <channel-type id="online">
+        <item-type>Switch</item-type>
+        <label>Online</label>
+        <description>Servers online status.</description>
+        <category>Switch</category>
+        <state readOnly="true"></state>
+    </channel-type>
+    
+    <channel-type id="playerName">
+        <item-type>String</item-type>
+        <label>Name</label>
+        <description>Name of minecraft player</description>
+        <state readOnly="true"></state>
+    </channel-type>
+    
+    <channel-type id="playerOnline">
+        <item-type>Switch</item-type>
+        <label>Online</label>
+        <description>Is player connected to server.</description>
+        <category>Switch</category>
+        <state readOnly="true"></state>
+    </channel-type>
+
+    <channel-type id="playerLevel">
+        <item-type>Number</item-type>
+        <label>Level</label>
+        <description>The level of player.</description>
+        <state readOnly="true"></state>
+    </channel-type>
+    
+    <channel-type id="playerTotalExperience">
+        <item-type>Number</item-type>
+        <label>Total Experience</label>
+        <description>The total experience of player.</description>
+        <state readOnly="true"></state>
+    </channel-type>
+    
+    <channel-type id="playerExperiencePercentage">
+        <item-type>Number</item-type>
+        <label>Experience</label>
+        <description>Percentage of experience bar filled for next level.</description>
+        <state readOnly="true"></state>
+    </channel-type>
+    
+    <channel-type id="playerHealth">
+        <item-type>Number</item-type>
+        <label>Health</label>
+        <description>The health of player.</description>
+        <state readOnly="true"></state>
+    </channel-type>
+    
+    <channel-type id="playerWalkSpeed">
+        <item-type>Number</item-type>
+        <label>Speed</label>
+        <description>The speed of player.</description>
+        <state readOnly="true"></state>
+    </channel-type>
+    
+    <channel-type id="playerLocationX">
+        <item-type>Number</item-type>
+        <label>Location x</label>
+        <description>The x location of player.</description>
+        <state readOnly="true"></state>
+    </channel-type>
+    
+    <channel-type id="playerLocationY">
+        <item-type>Number</item-type>
+        <label>Location y</label>
+        <description>The y location of player.</description>
+        <state readOnly="true"></state>
+    </channel-type>
+    
+    <channel-type id="playerLocationZ">
+        <item-type>Number</item-type>
+        <label>Location z</label>
+        <description>The z location of player.</description>
+        <state readOnly="true"></state>
+    </channel-type>
+    
+    <channel-type id="signActive">
+        <item-type>Switch</item-type>
+        <label>Online</label>
+        <description>Does sign have powered redstone bellow it.</description>
+        <category>Switch</category>
+        <state readOnly="true"></state>
+    </channel-type>
+    
+</thing:thing-descriptions>
